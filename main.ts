@@ -3,108 +3,126 @@ namespace SpriteKind {
     export const sushi = SpriteKind.create()
     export const Fireball = SpriteKind.create()
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Fireball, function (sprite5, otherSprite3) {
+
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Fireball, function on_on_overlap(sprite5: Sprite, otherSprite3: Sprite) {
     info.changeLifeBy(-2)
     otherSprite3.destroy()
 })
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (Hops_and_Paw.vy == 0) {
-        Hops_and_Paw.vy = -150
+controller.A.onEvent(ControllerButtonEvent.Pressed, function on_a_pressed() {
+    if (sushicat.vy == 0) {
+        sushicat.vy = -150
     }
+    
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite6, otherSprite4) {
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function on_on_overlap2(sprite6: Sprite, otherSprite4: Sprite) {
     otherSprite4.destroy()
-    if (Hops_and_Paw.y < otherSprite4.y) {
+    if (sushicat.y < otherSprite4.y) {
         info.changeScoreBy(3)
     } else {
         info.changeLifeBy(-1)
     }
+    
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.sushi, function (sprite4, otherSprite2) {
+sprites.onOverlap(SpriteKind.Player, SpriteKind.sushi, function on_on_overlap3(sprite4: Sprite, otherSprite2: Sprite) {
+    
     otherSprite2.destroy()
     fly = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.Enemy)
-    animation.runImageAnimation(
-    fly,
-    [img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . f f f f f f f . . . . . 
-        . . . f 6 1 1 f 1 1 6 f . . . . 
-        . . . f 1 6 1 f 1 6 1 f . . . . 
-        . f . . . 1 6 1 6 1 . . . f . . 
-        . . f . f f f f f f f . f . . . 
-        . . . f c c 2 c 2 c c f . . . . 
-        . . . f f c f c f c f f . . . . 
-        . . . f c c c c c c c f . . . . 
-        . . f . f f f f f f f . f . . . 
-        `,img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . f f f f f f f . . . . . 
-        . . . f c c c f c c c f . . . . 
-        . . . f f c c f c c f f . . . . 
-        . . . f c c c f c c c f . . . . 
-        . . . . f f f f f f f . . . . . 
-        `],
-    100,
-    true
-    )
-    fly.setPosition(Hops_and_Paw.x + 80, Hops_and_Paw.y - 80)
-    fly.follow(Hops_and_Paw, 50)
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            `, SpriteKind.Enemy)
+    animation.runImageAnimation(fly, [img`
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . f f f f f f f . . . . .
+                . . . f 6 1 1 f 1 1 6 f . . . .
+                . . . f 1 6 1 f 1 6 1 f . . . .
+                . f . . . 1 6 1 6 1 . . . f . .
+                . . f . f f f f f f f . f . . .
+                . . . f c c 2 c 2 c c f . . . .
+                . . . f f c f c f c f f . . . .
+                . . . f c c c c c c c f . . . .
+                . . f . f f f f f f f . f . . .
+                `, img`
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . f f f f f f f . . . . .
+                . . . f c c c f c c c f . . . .
+                . . . f f c c f c c f f . . . .
+                . . . f c c c f c c c f . . . .
+                . . . . f f f f f f f . . . . .
+                `], 100, true)
+    fly.setPosition(sushicat.x + 80, sushicat.y - 80)
+    fly.follow(sushicat, 50)
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`tile3`, function (sprite2, location) {
+scene.onOverlapTile(SpriteKind.Player, assets.tile`
+        tile3
+        `, function on_overlap_tile(sprite2: Sprite, location: tiles.Location) {
     game.over(false, effects.melt)
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`tile2`, function (sprite3, location2) {
+scene.onOverlapTile(SpriteKind.Player, assets.tile`
+        tile2
+        `, function on_overlap_tile2(sprite3: Sprite, location2: tiles.Location) {
+    
     current_level += 1
     startLevel()
 })
-function startLevel () {
+function startLevel() {
+    
     if (current_level == 0) {
-        tiles.setTilemap(tilemap`level`)
+        tiles.setTilemap(tilemap`
+            level
+            `)
     } else if (current_level == 1) {
-        tiles.setTilemap(tilemap`level_0`)
+        tiles.setTilemap(tilemap`
+            level_0
+            `)
     } else if (current_level == 2) {
-        tiles.setTilemap(tilemap`level_1`)
+        tiles.setTilemap(tilemap`
+            level_1
+            `)
     } else {
         game.over(true)
     }
-    tiles.placeOnRandomTile(Hops_and_Paw, assets.tile`tile6`)
-    for (let value of tiles.getTilesByType(assets.tile`tile6`)) {
-        tiles.setTileAt(value, assets.tile`tile0`)
+    
+    tiles.placeOnRandomTile(sushicat, assets.tile`
+        tile6
+        `)
+    for (let value of tiles.getTilesByType(assets.tile`
+        tile6
+        `)) {
+        tiles.setTileAt(value, assets.tile`
+            tile0
+            `)
     }
-    scene.cameraFollowSprite(Hops_and_Paw)
+    scene.cameraFollowSprite(sushicat)
     info.setLife(5)
     for (let value2 of sprites.allOfKind(SpriteKind.Enemy)) {
         value2.destroy()
@@ -115,247 +133,250 @@ function startLevel () {
     for (let value4 of sprites.allOfKind(SpriteKind.sushi)) {
         value4.destroy()
     }
-    for (let value5 of tiles.getTilesByType(assets.tile`tile4`)) {
+    for (let value5 of tiles.getTilesByType(assets.tile`
+        tile4
+        `)) {
         sushi1 = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . f f f f f f f . . . . 
-            . . . . f 1 1 1 1 1 1 1 f . . . 
-            . . . f 1 1 4 4 4 4 1 1 1 f . . 
-            . . f 1 1 1 1 1 1 1 1 1 1 1 f . 
-            . . f 1 4 1 1 1 1 1 1 1 1 1 f . 
-            . . 6 1 4 1 1 1 1 1 1 1 1 1 6 . 
-            . . f 1 4 1 1 1 1 1 1 1 1 1 f . 
-            . . f 1 4 1 1 1 1 1 1 1 1 1 f . 
-            . . 6 1 4 1 1 1 1 1 1 1 1 1 6 . 
-            . . f 1 4 1 1 1 1 1 1 1 1 1 f . 
-            . . . f 1 1 4 4 1 1 1 1 1 f . . 
-            . . . . f 1 1 1 1 1 1 1 f . . . 
-            . . . . . f f f f f f f . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, SpriteKind.onigiri)
-        animation.runImageAnimation(
-        sushi1,
-        [img`
-            . . . . . . . . . . . . . . . . 
-            . . . 6 f f f f f f 6 . . . . . 
-            . . 6 f 1 1 1 1 1 1 1 6 . . . . 
-            . 6 f 1 4 4 1 4 4 1 1 1 6 . . . 
-            . f 1 4 1 1 1 1 1 1 1 1 1 f . . 
-            . f 1 4 1 1 1 1 1 1 1 1 1 f . . 
-            . f 1 4 1 1 1 1 1 1 1 1 1 f . . 
-            . f 1 4 1 1 1 1 1 1 1 1 1 f . . 
-            . f 1 4 1 1 1 1 1 1 1 1 1 f . . 
-            . f 1 4 1 1 1 1 1 1 1 1 1 f . . 
-            . f 1 1 1 1 1 1 1 1 1 1 1 f . . 
-            . . f 1 1 4 4 4 1 1 1 1 f . . . 
-            . . . f 1 1 1 1 1 1 1 f . . . . 
-            . . . . f f f f f f f . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . 6 f f f 6 . . . . . . 
-            . . . . 6 1 1 1 1 1 6 . . . . . 
-            . . . 6 1 1 4 4 4 1 1 6 . . . . 
-            . . 6 1 4 1 1 1 1 1 1 1 6 . . . 
-            . . f 1 4 1 1 1 1 1 1 1 f . . . 
-            . . f 1 4 1 1 1 1 1 1 1 f . . . 
-            . . f 1 4 1 1 1 1 1 1 1 f . . . 
-            . . f 1 4 1 1 1 1 1 1 1 f . . . 
-            . . f 1 4 1 1 1 1 1 1 1 f . . . 
-            . . f 1 1 1 1 1 1 1 1 1 f . . . 
-            . . . f 1 1 4 4 1 1 1 f . . . . 
-            . . . . f 1 1 1 1 1 f . . . . . 
-            . . . . . f f f f f . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . f f f . . . . . . . 
-            . . . . . 6 1 1 1 6 . . . . . . 
-            . . . . 6 1 4 4 1 1 6 . . . . . 
-            . . . 6 1 4 1 1 1 1 1 6 . . . . 
-            . . . f 1 4 1 1 1 1 1 f . . . . 
-            . . . f 1 4 1 1 1 1 1 f . . . . 
-            . . . f 1 4 1 1 1 1 1 f . . . . 
-            . . . f 1 4 1 1 1 1 1 f . . . . 
-            . . . f 1 4 1 1 1 1 1 f . . . . 
-            . . . f 1 1 1 1 1 1 1 f . . . . 
-            . . . . f 1 1 4 1 1 f . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . . f f f . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 6 . . . . . . . . 
-            . . . . . . 6 1 6 . . . . . . . 
-            . . . . . 6 1 4 1 6 . . . . . . 
-            . . . . 6 1 4 1 1 1 6 . . . . . 
-            . . . . f 1 4 1 1 1 f . . . . . 
-            . . . . f 1 4 1 1 1 f . . . . . 
-            . . . . f 1 4 1 1 1 f . . . . . 
-            . . . . f 1 4 1 1 1 f . . . . . 
-            . . . . f 1 4 1 1 1 f . . . . . 
-            . . . . f 1 1 1 1 1 f . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 6 . . . . . . . . 
-            . . . . . . 6 1 6 . . . . . . . 
-            . . . . . . f 4 f . . . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 6 . . . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . f 4 f . . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 6 . . . . . . . . 
-            . . . . . . 6 1 6 . . . . . . . 
-            . . . . . . f 4 f . . . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . . f . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 6 . . . . . . . . 
-            . . . . . . 6 1 6 . . . . . . . 
-            . . . . . 6 1 4 1 6 . . . . . . 
-            . . . . f 1 4 1 1 1 f . . . . . 
-            . . . . f 1 4 1 1 1 f . . . . . 
-            . . . . f 1 4 1 1 1 f . . . . . 
-            . . . . f 1 4 1 1 1 f . . . . . 
-            . . . . f 1 4 1 1 1 f . . . . . 
-            . . . . f 1 4 1 1 1 f . . . . . 
-            . . . . f 1 1 1 1 1 f . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . . f 1 f . . . . . . . 
-            . . . . . . . f f . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . 6 f 6 . . . . . . . 
-            . . . . . 6 1 1 1 6 . . . . . . 
-            . . . . 6 1 4 4 1 1 6 . . . . . 
-            . . . f 1 4 1 1 1 1 1 f . . . . 
-            . . . f 1 4 1 1 1 1 1 f . . . . 
-            . . . f 1 4 1 1 1 1 1 f . . . . 
-            . . . f 1 4 1 1 1 1 1 f . . . . 
-            . . . f 1 4 1 1 1 1 1 f . . . . 
-            . . . f 1 4 1 1 1 1 1 f . . . . 
-            . . . f 1 1 1 1 1 1 1 f . . . . 
-            . . . . f 1 1 4 1 1 f . . . . . 
-            . . . . . f 1 1 1 f . . . . . . 
-            . . . . . . f f f . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `],
-        100,
-        true
-        )
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . f f f f f f f . . . .
+                . . . . f 1 1 1 1 1 1 1 f . . .
+                . . . f 1 1 4 4 4 4 1 1 1 f . .
+                . . f 1 1 1 1 1 1 1 1 1 1 1 f .
+                . . f 1 4 1 1 1 1 1 1 1 1 1 f .
+                . . 6 1 4 1 1 1 1 1 1 1 1 1 6 .
+                . . f 1 4 1 1 1 1 1 1 1 1 1 f .
+                . . f 1 4 1 1 1 1 1 1 1 1 1 f .
+                . . 6 1 4 1 1 1 1 1 1 1 1 1 6 .
+                . . f 1 4 1 1 1 1 1 1 1 1 1 f .
+                . . . f 1 1 4 4 1 1 1 1 1 f . .
+                . . . . f 1 1 1 1 1 1 1 f . . .
+                . . . . . f f f f f f f . . . .
+                . . . . . . . . . . . . . . . .
+                `, SpriteKind.onigiri)
+        animation.runImageAnimation(sushi1, [img`
+                    . . . . . . . . . . . . . . . .
+                    . . . 6 f f f f f f 6 . . . . .
+                    . . 6 f 1 1 1 1 1 1 1 6 . . . .
+                    . 6 f 1 4 4 1 4 4 1 1 1 6 . . .
+                    . f 1 4 1 1 1 1 1 1 1 1 1 f . .
+                    . f 1 4 1 1 1 1 1 1 1 1 1 f . .
+                    . f 1 4 1 1 1 1 1 1 1 1 1 f . .
+                    . f 1 4 1 1 1 1 1 1 1 1 1 f . .
+                    . f 1 4 1 1 1 1 1 1 1 1 1 f . .
+                    . f 1 4 1 1 1 1 1 1 1 1 1 f . .
+                    . f 1 1 1 1 1 1 1 1 1 1 1 f . .
+                    . . f 1 1 4 4 4 1 1 1 1 f . . .
+                    . . . f 1 1 1 1 1 1 1 f . . . .
+                    . . . . f f f f f f f . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    `, img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . 6 f f f 6 . . . . . .
+                    . . . . 6 1 1 1 1 1 6 . . . . .
+                    . . . 6 1 1 4 4 4 1 1 6 . . . .
+                    . . 6 1 4 1 1 1 1 1 1 1 6 . . .
+                    . . f 1 4 1 1 1 1 1 1 1 f . . .
+                    . . f 1 4 1 1 1 1 1 1 1 f . . .
+                    . . f 1 4 1 1 1 1 1 1 1 f . . .
+                    . . f 1 4 1 1 1 1 1 1 1 f . . .
+                    . . f 1 4 1 1 1 1 1 1 1 f . . .
+                    . . f 1 1 1 1 1 1 1 1 1 f . . .
+                    . . . f 1 1 4 4 1 1 1 f . . . .
+                    . . . . f 1 1 1 1 1 f . . . . .
+                    . . . . . f f f f f . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    `, img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . f f f . . . . . . .
+                    . . . . . 6 1 1 1 6 . . . . . .
+                    . . . . 6 1 4 4 1 1 6 . . . . .
+                    . . . 6 1 4 1 1 1 1 1 6 . . . .
+                    . . . f 1 4 1 1 1 1 1 f . . . .
+                    . . . f 1 4 1 1 1 1 1 f . . . .
+                    . . . f 1 4 1 1 1 1 1 f . . . .
+                    . . . f 1 4 1 1 1 1 1 f . . . .
+                    . . . f 1 4 1 1 1 1 1 f . . . .
+                    . . . f 1 1 1 1 1 1 1 f . . . .
+                    . . . . f 1 1 4 1 1 f . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . . f f f . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    `, img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . 6 . . . . . . . .
+                    . . . . . . 6 1 6 . . . . . . .
+                    . . . . . 6 1 4 1 6 . . . . . .
+                    . . . . 6 1 4 1 1 1 6 . . . . .
+                    . . . . f 1 4 1 1 1 f . . . . .
+                    . . . . f 1 4 1 1 1 f . . . . .
+                    . . . . f 1 4 1 1 1 f . . . . .
+                    . . . . f 1 4 1 1 1 f . . . . .
+                    . . . . f 1 4 1 1 1 f . . . . .
+                    . . . . f 1 1 1 1 1 f . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    `, img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . 6 . . . . . . . .
+                    . . . . . . 6 1 6 . . . . . . .
+                    . . . . . . f 4 f . . . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    `, img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . 6 . . . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . f 4 f . . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    `, img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . 6 . . . . . . . .
+                    . . . . . . 6 1 6 . . . . . . .
+                    . . . . . . f 4 f . . . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . . f . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    `, img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . 6 . . . . . . . .
+                    . . . . . . 6 1 6 . . . . . . .
+                    . . . . . 6 1 4 1 6 . . . . . .
+                    . . . . f 1 4 1 1 1 f . . . . .
+                    . . . . f 1 4 1 1 1 f . . . . .
+                    . . . . f 1 4 1 1 1 f . . . . .
+                    . . . . f 1 4 1 1 1 f . . . . .
+                    . . . . f 1 4 1 1 1 f . . . . .
+                    . . . . f 1 4 1 1 1 f . . . . .
+                    . . . . f 1 1 1 1 1 f . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . . f 1 f . . . . . . .
+                    . . . . . . . f f . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    `, img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . 6 f 6 . . . . . . .
+                    . . . . . 6 1 1 1 6 . . . . . .
+                    . . . . 6 1 4 4 1 1 6 . . . . .
+                    . . . f 1 4 1 1 1 1 1 f . . . .
+                    . . . f 1 4 1 1 1 1 1 f . . . .
+                    . . . f 1 4 1 1 1 1 1 f . . . .
+                    . . . f 1 4 1 1 1 1 1 f . . . .
+                    . . . f 1 4 1 1 1 1 1 f . . . .
+                    . . . f 1 4 1 1 1 1 1 f . . . .
+                    . . . f 1 1 1 1 1 1 1 f . . . .
+                    . . . . f 1 1 4 1 1 f . . . . .
+                    . . . . . f 1 1 1 f . . . . . .
+                    . . . . . . f f f . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    `], 100, true)
         tiles.placeOnTile(sushi1, value5)
-        tiles.setTileAt(value5, assets.tile`tile0`)
+        tiles.setTileAt(value5, assets.tile`
+            tile0
+            `)
     }
-    for (let value6 of tiles.getTilesByType(assets.tile`tile5`)) {
+    for (let value6 of tiles.getTilesByType(assets.tile`
+        tile5
+        `)) {
         sushi1 = sprites.create(img`
-            . . . . . . f f f f f f . . . . 
-            . . . . f f 1 1 b 1 1 1 1 f . . 
-            . . . f b 1 1 b 3 4 4 4 3 d f . 
-            . . f 1 1 b 3 4 4 3 4 4 4 d f . 
-            . . f f b 1 4 3 4 b 4 3 4 f f . 
-            . . f c f f b 4 b 1 b f f f f . 
-            . . f f f c f f f f f c c f f . 
-            . . f f e b c c c c c f c f f . 
-            . . f c f e c c c b b f f f f . 
-            . . f f e b b c c b b e f f f . 
-            . . f f f b b c c c f f c f f . 
-            . . . f f e e c c c f c f f . . 
-            . . . . f f f f f f f f f . . . 
-            . . . . . . f f f f f . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, SpriteKind.sushi)
+                . . . . . . f f f f f f . . . .
+                . . . . f f 1 1 b 1 1 1 1 f . .
+                . . . f b 1 1 b 3 4 4 4 3 d f .
+                . . f 1 1 b 3 4 4 3 4 4 4 d f .
+                . . f f b 1 4 3 4 b 4 3 4 f f .
+                . . f c f f b 4 b 1 b f f f f .
+                . . f f f c f f f f f c c f f .
+                . . f f e b c c c c c f c f f .
+                . . f c f e c c c b b f f f f .
+                . . f f e b b c c b b e f f f .
+                . . f f f b b c c c f f c f f .
+                . . . f f e e c c c f c f f . .
+                . . . . f f f f f f f f f . . .
+                . . . . . . f f f f f . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                `, SpriteKind.sushi)
         tiles.placeOnTile(sushi1, value6)
-        tiles.setTileAt(value6, assets.tile`tile0`)
+        tiles.setTileAt(value6, assets.tile`
+            tile0
+            `)
     }
-    for (let value7 of tiles.getTilesByType(assets.tile`tile11`)) {
+    for (let value7 of tiles.getTilesByType(assets.tile`
+        tile11
+        `)) {
         fireball = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 5 . . . . . . . . 
-            . . . . 5 5 2 5 5 4 5 5 . . . . 
-            . . . . . 4 4 4 4 2 4 . . . . . 
-            . . . 5 4 4 2 2 2 2 4 5 . . . . 
-            . . . 5 4 . 2 8 8 8 4 2 . . . . 
-            . . . 5 5 . 2 8 8 2 4 5 . . . . 
-            . . . 2 5 2 2 8 2 4 4 5 . . . . 
-            . . . . 5 4 2 2 2 4 5 . . . . . 
-            . . . . . . 4 . 4 4 5 . . . . . 
-            . . . 5 . 5 5 5 4 5 5 . . . . . 
-            . . . . . . . 2 5 5 . . . . . . 
-            . . . . . . . . . . . . . 5 . . 
-            . . . . . . . . . . . . . . . . 
-            `, SpriteKind.Fireball)
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . 5 . . . . . . . .
+                . . . . 5 5 2 5 5 4 5 5 . . . .
+                . . . . . 4 4 4 4 2 4 . . . . .
+                . . . 5 4 4 2 2 2 2 4 5 . . . .
+                . . . 5 4 . 2 8 8 8 4 2 . . . .
+                . . . 5 5 . 2 8 8 2 4 5 . . . .
+                . . . 2 5 2 2 8 2 4 4 5 . . . .
+                . . . . 5 4 2 2 2 4 5 . . . . .
+                . . . . . . 4 . 4 4 5 . . . . .
+                . . . 5 . 5 5 5 4 5 5 . . . . .
+                . . . . . . . 2 5 5 . . . . . .
+                . . . . . . . . . . . . . 5 . .
+                . . . . . . . . . . . . . . . .
+                `, SpriteKind.Fireball)
         tiles.placeOnTile(fireball, value7)
-        tiles.setTileAt(value7, assets.tile`tile0`)
-        animation.runMovementAnimation(
-        fireball,
-        "c 0 -100 0 100 0 0",
-        2000,
-        true
-        )
+        tiles.setTileAt(value7, assets.tile`
+            tile0
+            `)
+        animation.runMovementAnimation(fireball, "c 0 -100 0 100 0 0", 2000, true)
         fireball.startEffect(effects.fire)
     }
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.onigiri, function (sprite, otherSprite) {
+
+sprites.onOverlap(SpriteKind.Player, SpriteKind.onigiri, function on_on_overlap4(sprite: Sprite, otherSprite: Sprite) {
     info.changeScoreBy(1)
     otherSprite.destroy()
 })
-let fireball: Sprite = null
-let sushi1: Sprite = null
-let fly: Sprite = null
-let Hops_and_Paw: Sprite = null
+let fireball : Sprite = null
+let sushi1 : Sprite = null
+let fly : Sprite = null
+let sushicat : Sprite = null
 let current_level = 0
 scene.setBackgroundColor(9)
 scene.setBackgroundImage(img`
@@ -481,130 +502,133 @@ scene.setBackgroundImage(img`
     6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
     `)
 current_level = 0
-Hops_and_Paw = sprites.create(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . f 4 f f . 
-    . . . . . . . . . . . f 1 1 4 f 
-    f f f f f f f f f f f f 4 4 5 3 
-    1 4 1 4 1 4 4 f 4 4 1 4 1 4 4 4 
-    f . . f 1 4 4 1 4 4 1 4 1 4 f f 
-    . . . f 1 1 1 f 1 1 1 1 1 f . . 
-    . . . f 4 f 4 f f f 4 f 4 . . . 
-    . . . f 4 f 4 . . . 4 f 4 . . . 
-    `, SpriteKind.Player)
-controller.moveSprite(Hops_and_Paw, 80, 0)
+sushicat = sprites.create(img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . f 4 f f .
+        . . . . . . . . . . . f 1 1 4 f
+        f f f f f f f f f f f f 4 4 5 3
+        1 4 1 4 1 4 4 f 4 4 1 4 1 4 4 4
+        f . . f 1 4 4 1 4 4 1 4 1 4 f f
+        . . . f 1 1 1 f 1 1 1 1 1 f . .
+        . . . f 4 f 4 f f f 4 f 4 . . .
+        . . . f 4 f 4 . . . 4 f 4 . . .
+        `, SpriteKind.Player)
+controller.moveSprite(sushicat, 80, 0)
 startLevel()
-game.onUpdate(function () {
-    if (Hops_and_Paw.vy < 0) {
-        Hops_and_Paw.setImage(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . f 4 . . . . 
-            . . . . . . . . . . f 1 1 4 . . 
-            . . . . . . . . . . f 4 4 5 3 . 
-            . . . 4 f . . . . . 1 4 4 4 4 . 
-            . . . 1 . . . . . f 4 4 4 4 f . 
-            . . 1 4 . . . . . 1 4 4 f f . . 
-            . . 4 . . . . . f 4 4 4 4 1 4 1 
-            . . 1 f . . . f 1 4 4 4 f f f . 
-            . . 4 4 f f f 1 4 4 4 4 1 4 1 . 
-            . . f 1 4 4 1 4 4 4 f . . . . . 
-            . . . f f f 4 1 4 f . . . . . . 
-            . . . . . 4 4 . 4 . . . . . . . 
-            . . . . . 1 . . 1 . . . . . . . 
-            . . . . . 4 . . . . . . . . . . 
+game.onUpdate(function on_on_update() {
+    if (sushicat.vy < 0) {
+        sushicat.setImage(img`
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . f 4 . . . .
+            . . . . . . . . . . f 1 1 4 . .
+            . . . . . . . . . . f 4 4 5 3 .
+            . . . 4 f . . . . . 1 4 4 4 4 .
+            . . . 1 . . . . . f 4 4 4 4 f .
+            . . 1 4 . . . . . 1 4 4 f f . .
+            . . 4 . . . . . f 4 4 4 4 1 4 1
+            . . 1 f . . . f 1 4 4 4 f f f .
+            . . 4 4 f f f 1 4 4 4 4 1 4 1 .
+            . . f 1 4 4 1 4 4 4 f . . . . .
+            . . . f f f 4 1 4 f . . . . . .
+            . . . . . 4 4 . 4 . . . . . . .
+            . . . . . 1 . . 1 . . . . . . .
+            . . . . . 4 . . . . . . . . . .
             `)
-    } else if (Hops_and_Paw.vy > 0) {
-        Hops_and_Paw.setImage(img`
-            . . . . . . f 4 . . . . . . . . 
-            . . . . . f 4 . . . . . . . . . 
-            . . . . f 4 1 . . . . . . . . . 
-            . . . . f 1 . . . . . . . . . . 
-            . . . . f 4 f . . . . . . . . . 
-            . . . . f 1 4 f . . . . . . . . 
-            . . . . 4 4 1 4 f . . . . . . . 
-            . . . . 1 4 4 1 f . . . . . . . 
-            . . . . 4 4 4 4 4 f . . . . . . 
-            . . . . 1 . 1 4 1 4 f f 4 f f . 
-            . . . . 4 . 4 4 4 1 4 1 4 1 f . 
-            . . . . 4 . 4 . 4 4 4 4 4 4 5 3 
-            . . . . . . . . 4 4 1 1 4 1 1 4 
-            . . . . . . . . 4 . 4 f f f . . 
-            . . . . . . . 4 4 . 4 . . . . . 
-            . . . . . . . 1 4 . 1 4 . . . . 
+    } else if (sushicat.vy > 0) {
+        sushicat.setImage(img`
+            . . . . . . f 4 . . . . . . . .
+            . . . . . f 4 . . . . . . . . .
+            . . . . f 4 1 . . . . . . . . .
+            . . . . f 1 . . . . . . . . . .
+            . . . . f 4 f . . . . . . . . .
+            . . . . f 1 4 f . . . . . . . .
+            . . . . 4 4 1 4 f . . . . . . .
+            . . . . 1 4 4 1 f . . . . . . .
+            . . . . 4 4 4 4 4 f . . . . . .
+            . . . . 1 . 1 4 1 4 f f 4 f f .
+            . . . . 4 . 4 4 4 1 4 1 4 1 f .
+            . . . . 4 . 4 . 4 4 4 4 4 4 5 3
+            . . . . . . . . 4 4 1 1 4 1 1 4
+            . . . . . . . . 4 . 4 f f f . .
+            . . . . . . . 4 4 . 4 . . . . .
+            . . . . . . . 1 4 . 1 4 . . . .
             `)
-    } else if (Hops_and_Paw.x % 2 == 0) {
-        Hops_and_Paw.setImage(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . 4 f f . 
-            . . . . . . . . . . . . 1 4 4 f 
-            f f f f f f f f f f f f 4 4 f 3 
-            4 4 4 4 1 4 1 4 1 4 1 4 1 4 4 4 
-            f f f f 4 4 1 1 1 4 1 1 1 4 f f 
-            . . . f 1 4 1 4 1 4 1 4 4 f . . 
-            . . . f 4 4 f f f f f 4 f . . . 
-            . . . f f f . . . . f 4 f . . . 
-            `)
-    } else {
-        Hops_and_Paw.setImage(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . 4 . . . 
-            . . . . . . . . . . . . 1 4 4 . 
-            f f f f f f f f f f f f 4 1 f 3 
-            4 1 4 1 4 1 4 1 4 1 4 1 4 4 4 4 
-            f f f f 4 1 4 1 4 1 4 1 4 1 f . 
-            . . . f 4 4 4 4 4 4 4 4 4 f . . 
-            . . . f 4 f 4 f f f 4 f 4 . . . 
-            . . . f 4 f 4 . . . 4 . 4 . . . 
-            `)
-    }
-    if ((Hops_and_Paw.isHittingTile(CollisionDirection.Left) || Hops_and_Paw.isHittingTile(CollisionDirection.Right)) && Hops_and_Paw.vy >= 0) {
-        Hops_and_Paw.vy = 0
-        Hops_and_Paw.ay = 0
-        Hops_and_Paw.setImage(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . 3 4 f . 
-            . . . . . . . . . . . 4 f 4 f . 
-            . . . . . . . . . . . 4 4 4 f . 
-            . . . . . . . . . . 4 4 4 4 f . 
-            . . . . . . . . . . f f 1 4 1 4 
-            . . . . . . . . . . . f 1 4 f . 
-            . . . . . . . . . . . f 4 4 1 4 
-            . . . . . . f 4 f . . f 1 4 f . 
-            . . . . . . f 1 f . . f 1 4 f . 
-            . . . . . . f 4 f . . f 4 4 f . 
-            . . . . . . f 1 f . . f 4 4 1 4 
-            . . . . . . f 4 1 f f f 4 4 f . 
-            . . . . . . f f 4 1 4 1 4 1 4 4 
+    } else if (sushicat.x % 2 == 0) {
+        sushicat.setImage(img`
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . 4 f f .
+            . . . . . . . . . . . . 1 4 4 f
+            f f f f f f f f f f f f 4 4 f 3
+            4 4 4 4 1 4 1 4 1 4 1 4 1 4 4 4
+            f f f f 4 4 1 1 1 4 1 1 1 4 f f
+            . . . f 1 4 1 4 1 4 1 4 4 f . .
+            . . . f 4 4 f f f f f 4 f . . .
+            . . . f f f . . . . f 4 f . . .
             `)
     } else {
-        Hops_and_Paw.ay = 350
+        sushicat.setImage(img`
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . 4 . . .
+            . . . . . . . . . . . . 1 4 4 .
+            f f f f f f f f f f f f 4 1 f 3
+            4 1 4 1 4 1 4 1 4 1 4 1 4 4 4 4
+            f f f f 4 1 4 1 4 1 4 1 4 1 f .
+            . . . f 4 4 4 4 4 4 4 4 4 f . .
+            . . . f 4 f 4 f f f 4 f 4 . . .
+            . . . f 4 f 4 . . . 4 . 4 . . .
+            `)
     }
-    if (Hops_and_Paw.vx < 0 || Hops_and_Paw.isHittingTile(CollisionDirection.Left)) {
-        Hops_and_Paw.image.flipX()
-        Hops_and_Paw.setImage(Hops_and_Paw.image)
+    
+    if ((sushicat.isHittingTile(CollisionDirection.Left) || sushicat.isHittingTile(CollisionDirection.Right)) && sushicat.vy >= 0) {
+        sushicat.vy = 0
+        sushicat.ay = 0
+        sushicat.setImage(img`
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . 3 4 f .
+            . . . . . . . . . . . 4 f 4 f .
+            . . . . . . . . . . . 4 4 4 f .
+            . . . . . . . . . . 4 4 4 4 f .
+            . . . . . . . . . . f f 1 4 1 4
+            . . . . . . . . . . . f 1 4 f .
+            . . . . . . . . . . . f 4 4 1 4
+            . . . . . . f 4 f . . f 1 4 f .
+            . . . . . . f 1 f . . f 1 4 f .
+            . . . . . . f 4 f . . f 4 4 f .
+            . . . . . . f 1 f . . f 4 4 1 4
+            . . . . . . f 4 1 f f f 4 4 f .
+            . . . . . . f f 4 1 4 1 4 1 4 4
+            `)
+    } else {
+        sushicat.ay = 350
     }
+    
+    if (sushicat.vx < 0 || sushicat.isHittingTile(CollisionDirection.Left)) {
+        sushicat.image.flipX()
+        sushicat.setImage(sushicat.image)
+    }
+    
 })

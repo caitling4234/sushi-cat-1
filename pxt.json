@@ -1,5 +1,5 @@
 {
-    "name": "sushi cat 1**",
+    "name": "sushi cat *",
     "description": "",
     "dependencies": {
         "device": "*",
@@ -28,5 +28,5 @@
     "supportedTargets": [
         "arcade"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "pyprj"
 }

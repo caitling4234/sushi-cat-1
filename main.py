@@ -10,13 +10,13 @@ def on_on_overlap(sprite5, otherSprite3):
 sprites.on_overlap(SpriteKind.player, SpriteKind.Fireball, on_on_overlap)
 
 def on_a_pressed():
-    if Hops_and_Paw.vy == 0:
-        Hops_and_Paw.vy = -150
+    if sushicat.vy == 0:
+        sushicat.vy = -150
 controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
 
 def on_on_overlap2(sprite6, otherSprite4):
     otherSprite4.destroy()
-    if Hops_and_Paw.y < otherSprite4.y:
+    if sushicat.y < otherSprite4.y:
         info.change_score_by(3)
     else:
         info.change_life_by(-1)
@@ -83,8 +83,8 @@ def on_on_overlap3(sprite4, otherSprite2):
                 """)],
         100,
         True)
-    fly.set_position(Hops_and_Paw.x + 80, Hops_and_Paw.y - 80)
-    fly.follow(Hops_and_Paw, 50)
+    fly.set_position(sushicat.x + 80, sushicat.y - 80)
+    fly.follow(sushicat, 50)
 sprites.on_overlap(SpriteKind.player, SpriteKind.sushi, on_on_overlap3)
 
 def on_overlap_tile(sprite2, location):
@@ -121,7 +121,7 @@ def startLevel():
             """))
     else:
         game.over(True)
-    tiles.place_on_random_tile(Hops_and_Paw, assets.tile("""
+    tiles.place_on_random_tile(sushicat, assets.tile("""
         tile6
         """))
     for value in tiles.get_tiles_by_type(assets.tile("""
@@ -130,7 +130,7 @@ def startLevel():
         tiles.set_tile_at(value, assets.tile("""
             tile0
             """))
-    scene.camera_follow_sprite(Hops_and_Paw)
+    scene.camera_follow_sprite(sushicat)
     info.set_life(5)
     for value2 in sprites.all_of_kind(SpriteKind.enemy):
         value2.destroy()
@@ -392,7 +392,7 @@ sprites.on_overlap(SpriteKind.player, SpriteKind.onigiri, on_on_overlap4)
 fireball: Sprite = None
 sushi1: Sprite = None
 fly: Sprite = None
-Hops_and_Paw: Sprite = None
+sushicat: Sprite = None
 current_level = 0
 scene.set_background_color(9)
 scene.set_background_image(img("""
@@ -518,7 +518,7 @@ scene.set_background_image(img("""
     6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
     """))
 current_level = 0
-Hops_and_Paw = sprites.create(img("""
+sushicat = sprites.create(img("""
         . . . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . . .
@@ -537,12 +537,12 @@ Hops_and_Paw = sprites.create(img("""
         . . . f 4 f 4 . . . 4 f 4 . . .
         """),
     SpriteKind.player)
-controller.move_sprite(Hops_and_Paw, 80, 0)
+controller.move_sprite(sushicat, 80, 0)
 startLevel()
 
 def on_on_update():
-    if Hops_and_Paw.vy < 0:
-        Hops_and_Paw.set_image(img("""
+    if sushicat.vy < 0:
+        sushicat.set_image(img("""
             . . . . . . . . . . . . . . . .
             . . . . . . . . . . . . . . . .
             . . . . . . . . . . f 4 . . . .
@@ -560,8 +560,8 @@ def on_on_update():
             . . . . . 1 . . 1 . . . . . . .
             . . . . . 4 . . . . . . . . . .
             """))
-    elif Hops_and_Paw.vy > 0:
-        Hops_and_Paw.set_image(img("""
+    elif sushicat.vy > 0:
+        sushicat.set_image(img("""
             . . . . . . f 4 . . . . . . . .
             . . . . . f 4 . . . . . . . . .
             . . . . f 4 1 . . . . . . . . .
@@ -579,8 +579,8 @@ def on_on_update():
             . . . . . . . 4 4 . 4 . . . . .
             . . . . . . . 1 4 . 1 4 . . . .
             """))
-    elif Hops_and_Paw.x % 2 == 0:
-        Hops_and_Paw.set_image(img("""
+    elif sushicat.x % 2 == 0:
+        sushicat.set_image(img("""
             . . . . . . . . . . . . . . . .
             . . . . . . . . . . . . . . . .
             . . . . . . . . . . . . . . . .
@@ -599,7 +599,7 @@ def on_on_update():
             . . . f f f . . . . f 4 f . . .
             """))
     else:
-        Hops_and_Paw.set_image(img("""
+        sushicat.set_image(img("""
             . . . . . . . . . . . . . . . .
             . . . . . . . . . . . . . . . .
             . . . . . . . . . . . . . . . .
@@ -617,10 +617,10 @@ def on_on_update():
             . . . f 4 f 4 f f f 4 f 4 . . .
             . . . f 4 f 4 . . . 4 . 4 . . .
             """))
-    if (Hops_and_Paw.is_hitting_tile(CollisionDirection.LEFT) or Hops_and_Paw.is_hitting_tile(CollisionDirection.RIGHT)) and Hops_and_Paw.vy >= 0:
-        Hops_and_Paw.vy = 0
-        Hops_and_Paw.ay = 0
-        Hops_and_Paw.set_image(img("""
+    if (sushicat.is_hitting_tile(CollisionDirection.LEFT) or sushicat.is_hitting_tile(CollisionDirection.RIGHT)) and sushicat.vy >= 0:
+        sushicat.vy = 0
+        sushicat.ay = 0
+        sushicat.set_image(img("""
             . . . . . . . . . . . . . . . .
             . . . . . . . . . . . . . . . .
             . . . . . . . . . . . . . . . .
@@ -639,8 +639,8 @@ def on_on_update():
             . . . . . . f f 4 1 4 1 4 1 4 4
             """))
     else:
-        Hops_and_Paw.ay = 350
-    if Hops_and_Paw.vx < 0 or Hops_and_Paw.is_hitting_tile(CollisionDirection.LEFT):
-        Hops_and_Paw.image.flip_x()
-        Hops_and_Paw.set_image(Hops_and_Paw.image)
+        sushicat.ay = 350
+    if sushicat.vx < 0 or sushicat.is_hitting_tile(CollisionDirection.LEFT):
+        sushicat.image.flip_x()
+        sushicat.set_image(sushicat.image)
 game.on_update(on_on_update)
